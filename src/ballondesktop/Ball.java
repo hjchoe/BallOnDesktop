@@ -49,7 +49,6 @@ class Ball extends Ellipse2D.Float
     
     public void Release()
     {
-    	System.out.println(this.velY);
     	if (this.x < 0.0f)
         {
             this.velX *= -0.80f;
