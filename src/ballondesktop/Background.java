@@ -21,7 +21,7 @@ public class Background extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-	doDrawing(g);
+		doDrawing(g);
 	}
 
     private void initUI()
