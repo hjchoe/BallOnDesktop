@@ -9,19 +9,19 @@ import javax.swing.*;
 public class Background extends JPanel
 {
 	JLabel ball = new JLabel();
-    private static Ball b;
+	private static Ball b;
 	private static float a = 0.3f;
-	
+
 	public Background()
 	{
 		initUI();
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-        doDrawing(g);
+	doDrawing(g);
 	}
 
     private void initUI()
