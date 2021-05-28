@@ -2,7 +2,6 @@ package ballondesktop;
 
 import java.util.concurrent.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -15,13 +14,17 @@ public class Background extends JPanel
 	public Background()
 	{
 		initUI();
-	}
+		final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
-	@Override
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		doDrawing(g);
+        final Runnable rebuild = new Runnable()
+        {
+            public void run()
+            {
+                check();
+                repaint();
+            }
+        };
+        executorService.scheduleAtFixedRate(rebuild, 0, 25, TimeUnit.MILLISECONDS);
 	}
 
     private void initUI()
@@ -30,107 +33,42 @@ public class Background extends JPanel
     	setBackground(new Color(0, 0, 0, 255));
     	setFocusable(true);
     	
-        MovingAdapter ma = new MovingAdapter();
+        MouseSense ma = new MouseSense();
         addMouseMotionListener(ma);
         addMouseListener(ma);
         
-        TypingAdapter ka = new TypingAdapter();
+        KeySense ka = new KeySense();
         addKeyListener(ka);
         
         b = new Ball(250f, 50f, 10f);
-        
-        final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-
-        final Runnable rebuild = new Runnable()
-        {
-            public void run()
-            {
-                gravity();
-                thrown();
-                repaint();
-            }
-        };
-        executorService.scheduleAtFixedRate(rebuild, 0, 25, TimeUnit.MILLISECONDS);
     }
-
-    private void doDrawing(Graphics g)
-    {
-        Graphics2D g2d = (Graphics2D)g;
+    
+    @Override
+	public void paintComponent(Graphics g)
+	{
+		Graphics2D g2d = (Graphics2D)g;
+		super.paintComponent(g2d);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         g2d.setColor(b.getColor());
         g2d.fill(b);
-    }
-
-    public static void gravity()
+	}
+    
+    public void check()
     {
-    	Boolean gravity_state = b.getGravity_state();
+    	Boolean gravityState = b.getGravityState();
     	float velY = b.getVelY();
-    	
-        if (gravity_state) b.changeVelY(velY + a);
+    	if (gravityState) b.changeVelY(velY + a);
         else b.changeVelY(0f);
-    }
-
-    public void thrown()
-    {
-    	Boolean grabbed_state = b.getGrabbed_state();
-    	Boolean released_state = b.getReleased_state();
     	
-        if (grabbed_state && !released_state) b.Grab();
-        else if (!grabbed_state && released_state) b.Release();
-        b.PosUpdate();
-    }
-
-    class MovingAdapter extends MouseAdapter
-    {
-        private int x;
-        private int y;
-
-        @Override
-        public void mouseReleased(MouseEvent e)
-        {
-            b.Released();
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e)
-        {
-        	if (e.getButton() == MouseEvent.BUTTON1)
-        	{
-        		x = e.getX();
-                y = e.getY();
-            }
-        	else if (e.getButton() == MouseEvent.BUTTON3) b.reset();
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent e)
-        {
-            doMove(e);
-        }
-
-        private void doMove(MouseEvent e)
-        {
-            int dx = e.getX() - x;
-            int dy = e.getY() - y;
-
-            if (b.isHit(x, y))
-            {
-                b.Hit();
-                b.moveX(dx);
-                b.moveY(dy);
-            }
-            x += dx;
-            y += dy;            
-        }
+    	Boolean grabbedState = b.getGrabbedState();
+        if (grabbedState) b.grabbed();
+        else b.released();
+        b.posUpdate();
     }
     
-    class TypingAdapter extends KeyAdapter
+    public static Ball getBall()
     {
-        @Override
-        public void keyPressed(KeyEvent ke)
-        {
-            if (ke.getKeyChar() == KeyEvent.VK_SPACE) b.changeColor();
-        }
+    	return b;
     }
 }

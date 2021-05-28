@@ -6,9 +6,8 @@ import java.awt.geom.Ellipse2D;
 @SuppressWarnings("serial")
 class Ball extends Ellipse2D.Float
 {
-    private Boolean gravity_state = true;
-    private Boolean grabbed_state = false;
-    private Boolean released_state = true;
+    private Boolean gravityState = true;
+    private Boolean grabbedState = false;
     private float orgXone;
     private float orgYone;
     private float orgXtwo;
@@ -30,45 +29,48 @@ class Ball extends Ellipse2D.Float
         return getBounds2D().contains(x, y);
     }
     
-    public void Hit()
+    public void release()
     {
-    	this.gravity_state = false;
-        this.grabbed_state = true;
-        this.released_state = false;
+    	this.gravityState = true;
+    	this.grabbedState = false;
     }
     
-    public void Released()
-    {
-    	this.gravity_state = true;
-        if (this.grabbed_state)
-        {
-            this.grabbed_state = false;
-            this.released_state = true;
-        }
-    }
-    
-    public void Release()
+    public void released()
     {
     	if (this.x < 0.0f)
         {
             this.velX *= -0.80f;
             this.x = 0.0f;
-        } else if (this.x > Structure.d.width - 20f)
+        }
+    	else if (this.x > Structure.d.width - 20f)
         {
             this.velX *= -0.80f;
             this.x = Structure.d.width - 20f;
         }
         
-        if (this.y > Structure.d.height - 45f || this.y < 5)
-        {
+        if (this.y > Structure.d.height - 45f)
+    	{
         	this.velX *= 0.90f;
             this.velY *= -0.80f;
+            this.y = Structure.d.height - 45f;
+    	}
+        else if (this.y < 5)
+		{
+        	this.velX *= 0.90f;
+            this.velY *= -0.80f;
+            this.y = 5;
         }
         this.moveX(this.velX);
         this.moveY(this.velY);
     }
     
-    public void Grab()
+    public void grab()
+    {
+    	this.gravityState = false;
+        this.grabbedState = true;
+    }
+    
+    public void grabbed()
     {
         float orgXavg = (this.orgXone + this.orgXtwo)/2;
         float orgYavg = (this.orgYone + this.orgYtwo)/2;
@@ -107,7 +109,7 @@ class Ball extends Ellipse2D.Float
     	this.velY = v;
     }
     
-    public void PosUpdate()
+    public void posUpdate()
     {
     	this.orgXone = this.orgXtwo;
         this.orgYone = this.orgYtwo;
@@ -135,18 +137,13 @@ class Ball extends Ellipse2D.Float
     	return this.c;
     }
     
-    public Boolean getGravity_state()
+    public Boolean getGravityState()
     {
-    	return this.gravity_state;
+    	return this.gravityState;
     }
     
-    public Boolean getReleased_state()
+    public Boolean getGrabbedState()
     {
-    	return this.released_state;
-    }
-    
-    public Boolean getGrabbed_state()
-    {
-    	return this.grabbed_state;
+    	return this.grabbedState;
     }
 }
