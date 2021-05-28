@@ -15,7 +15,7 @@ class Ball extends Ellipse2D.Float
     private float velX = 0;
     private float velY = 0;
     private Color c;
-    private Color[] colors = {Color.CYAN, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.BLACK};
+    private Color[] colors = {Color.CYAN, Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.PINK, Color.BLACK, Color.GRAY, Color.WHITE};
     private int colorIndex = 0;
 
     public Ball(float x, float y, float r)
@@ -127,7 +127,7 @@ class Ball extends Ellipse2D.Float
     
     public void changeColor()
     {
-    	if (this.colorIndex == 5) this.colorIndex = -1;
+    	if (this.colorIndex == colors.length-1) this.colorIndex = -1;
     	this.colorIndex++;
     	this.c = colors[colorIndex];
     }

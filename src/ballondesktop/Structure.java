@@ -25,7 +25,7 @@ public class Structure extends JFrame
         setPreferredSize(new Dimension(d));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         setDefaultLookAndFeelDecorated(true);
     	setBackground(new Color(0, 0, 0, 0));
