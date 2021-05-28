@@ -40,7 +40,7 @@ public class Background extends JPanel
         KeySense ka = new KeySense();
         addKeyListener(ka);
         
-        b = new Ball(250f, 50f, 10f);
+        b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
     }
     
     @Override
