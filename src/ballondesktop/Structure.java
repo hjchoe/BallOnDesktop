@@ -19,7 +19,7 @@ public class Structure extends JFrame
 	    background = new Background();
 	    add(background);
 	
-	    setTitle("Gravity Simulation");
+	    setTitle("Ball On Desktop");
         setPreferredSize(new Dimension(d));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
