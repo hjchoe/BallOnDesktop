@@ -10,5 +10,9 @@ class KeySense extends KeyAdapter
     {
     	Ball b = Background.getBall();
         if (ke.getKeyChar() == KeyEvent.VK_SPACE) b.changeColor();
+        else if (ke.getKeyCode() == KeyEvent.VK_T)
+        {
+        	Background.changeTrailState();
+        }
     }
 }

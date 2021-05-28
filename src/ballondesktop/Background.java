@@ -9,7 +9,9 @@ public class Background extends JPanel
 {
 	JLabel ball = new JLabel();
 	private static Ball b;
+	private static Trail t;
 	private static float a = 0.3f;
+	private static Boolean trailState = false;
 
 	public Background()
 	{
@@ -25,6 +27,15 @@ public class Background extends JPanel
             }
         };
         executorService.scheduleAtFixedRate(rebuild, 0, 25, TimeUnit.MILLISECONDS);
+        
+        final Runnable trail = new Runnable()
+        {
+            public void run()
+            {
+                if (trailState) trailUpdate();
+            }
+        };
+        executorService.scheduleAtFixedRate(trail, 0, 5, TimeUnit.MILLISECONDS);
 	}
 
     private void initUI()
@@ -41,6 +52,7 @@ public class Background extends JPanel
         addKeyListener(ka);
         
         b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
+        t = new Trail();
     }
     
     @Override
@@ -50,7 +62,19 @@ public class Background extends JPanel
 		super.paintComponent(g2d);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        g2d.setColor(b.getColor());
+        Color c = b.getColor();
+        if (trailState)
+        {
+	        Color n = oppositeColor(c);
+	        
+	        g2d.setColor(n);
+	        
+	        for (Trail.Circle circles : t.circles)
+	        {
+	        	g2d.fill(circles);
+	        }
+        }
+        g2d.setColor(c);
         g2d.fill(b);
 	}
     
@@ -65,10 +89,33 @@ public class Background extends JPanel
         if (grabbedState) b.grabbed();
         else b.released();
         b.posUpdate();
+        b.updateCoords();
+    }
+    
+    public static void changeTrailState()
+    {
+    	trailState = !trailState;
+    }
+    
+    public void trailUpdate()
+    {
+    	//b.updateCoords();
+    	for (int i = 0; i < 20; i++)
+    	{
+    		t.circles[i].updateLocation(b.getXvalues()[i], b.getYvalues()[i]);;
+    	}
     }
     
     public static Ball getBall()
     {
     	return b;
+    }
+    
+    public static Color oppositeColor(Color old)
+    {
+    	int red = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getRed(); 
+        int green = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getGreen();
+        int blue = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getBlue();
+    	return new Color(red, green, blue, 25);
     }
 }

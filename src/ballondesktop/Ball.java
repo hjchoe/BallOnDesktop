@@ -17,6 +17,9 @@ class Ball extends Ellipse2D.Float
     private Color c;
     private Color[] colors = {Color.CYAN, Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.PINK, Color.BLACK, Color.GRAY, Color.WHITE};
     private int colorIndex = 0;
+    private float[] xValues = new float[20];
+    private float[] yValues = new float[20];
+    private int coordIndex = 0;
 
     public Ball(float x, float y, float r)
     {
@@ -145,5 +148,23 @@ class Ball extends Ellipse2D.Float
     public Boolean getGrabbedState()
     {
     	return this.grabbedState;
+    }
+    
+    public void updateCoords()
+    {
+    	if (this.coordIndex == 19) this.coordIndex = -1;
+    	this.coordIndex++;
+    	this.xValues[coordIndex] = this.x;
+    	this.yValues[coordIndex] = this.y;
+    }
+    
+    public float[] getXvalues()
+    {
+    	return this.xValues;
+    }
+    
+    public float[] getYvalues()
+    {
+    	return this.yValues;
     }
 }
