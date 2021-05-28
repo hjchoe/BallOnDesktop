@@ -7,9 +7,7 @@ import javax.swing.*;
 public class Structure extends JFrame
 {
 	static Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-	JLabel label;
 	protected static Background background;
-	static Structure fr;
 
 	public Structure() throws AWTException
 	{
@@ -32,10 +30,4 @@ public class Structure extends JFrame
         pack();
         setVisible(true);
 	}
-    
-    public static void main(String[] args) throws AWTException
-    {
-    	fr = new Structure();
-		fr.setVisible(true);
-    }
 }

@@ -99,7 +99,6 @@ public class Background extends JPanel
     
     public void trailUpdate()
     {
-    	//b.updateCoords();
     	for (int i = 0; i < 20; i++)
     	{
     		t.circles[i].updateLocation(b.getXvalues()[i], b.getYvalues()[i]);;
