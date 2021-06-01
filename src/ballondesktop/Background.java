@@ -7,7 +7,6 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class Background extends JPanel
 {
-	JLabel ball = new JLabel();
 	private static Ball b;
 	private static Trail t;
 	private static float a = 0.3f;
