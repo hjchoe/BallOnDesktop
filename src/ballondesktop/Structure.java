@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Structure extends JFrame
+class Structure extends JFrame
 {
 	static Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	protected static Background background;

@@ -3,7 +3,7 @@ package ballondesktop;
 import java.awt.geom.Ellipse2D;
 
 @SuppressWarnings("serial")
-public class Trail
+class Trail
 {
 	public Circle[] circles = new Circle[20];
 	

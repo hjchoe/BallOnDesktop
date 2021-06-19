@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Background extends JPanel
+class Background extends JPanel
 {
 	private static Ball b;
 	private static Trail t;

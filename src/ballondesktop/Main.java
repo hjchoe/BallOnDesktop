@@ -2,7 +2,7 @@ package ballondesktop;
 
 import java.awt.AWTException;
 
-public class Main
+class Main
 {
 	static Structure fr;
 	
