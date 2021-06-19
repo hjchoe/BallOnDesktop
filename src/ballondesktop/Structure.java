@@ -17,17 +17,19 @@ public class Structure extends JFrame
 	private void initUI() throws AWTException
 	{
 	    background = new Background();
-	    add(background);
-	
+		setContentPane(background);
+
 	    setTitle("Ball On Desktop");
         setPreferredSize(new Dimension(d));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
+		setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		setUndecorated(true);
         setDefaultLookAndFeelDecorated(true);
-    	setBackground(new Color(0, 0, 0, 0));
+    	setBackground(new Color(0, 0, 0, 1));
         pack();
+
+		setLocationRelativeTo(null);
         setVisible(true);
+		setFocusable(false);
 	}
 }

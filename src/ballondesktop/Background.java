@@ -42,6 +42,7 @@ public class Background extends JPanel
     	setOpaque(false);
     	setBackground(new Color(0, 0, 0, 255));
     	setFocusable(true);
+        requestFocus();
     	
         MouseSense ma = new MouseSense();
         addMouseMotionListener(ma);
