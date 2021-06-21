@@ -45,17 +45,17 @@ class Ball extends Ellipse2D.Float
             this.velX *= -0.80f;
             this.x = 0.0f;
         }
-    	else if (this.x > Structure.d.width - 20f)
+    	else if (this.x > Structure.d.width - 35f)
         {
             this.velX *= -0.80f;
-            this.x = Structure.d.width - 20f;
+            this.x = Structure.d.width - 35f;
         }
         
-        if (this.y > Structure.d.height - 45f)
+        if (this.y > Structure.d.height - 75f)
     	{
         	this.velX *= 0.90f;
             this.velY *= -0.80f;
-            this.y = Structure.d.height - 45f;
+            this.y = Structure.d.height - 75f;
     	}
         else if (this.y < 5)
 		{

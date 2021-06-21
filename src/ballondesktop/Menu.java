@@ -7,10 +7,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+@SuppressWarnings("serial")
 public class Menu extends JMenuBar
 {
 	private JMenu mMenu, mControls;
-	private JMenuItem mRespawn, mColor, mTrail, mQuit;
+	private JMenuItem mRespawn, mColor, mTrail, mFullscreen, mRegscreen, mQuit;
 	
 	Menu()
 	{
@@ -20,6 +21,8 @@ public class Menu extends JMenuBar
 	private void initUI()
 	{
 		mMenu = new JMenu("Menu");
+		mFullscreen = new JMenuItem("Fullscreen");
+		mRegscreen = new JMenuItem("Minimize");
 		mQuit = new JMenuItem("Quit");
 		
 		mControls = new JMenu("Controls");
@@ -27,6 +30,8 @@ public class Menu extends JMenuBar
 		mColor = new JMenuItem("Change Color | SPACEBAR");
 		mTrail = new JMenuItem("Toggle Trail | T key");
 		
+		mMenu.add(mFullscreen);
+		mMenu.add(mRegscreen);
 		mMenu.add(mQuit);
 		this.add(mMenu);
 		
@@ -66,6 +71,24 @@ public class Menu extends JMenuBar
 			}  
 		});
     	
+    	this.mFullscreen.addActionListener(new ActionListener()
+		{
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			Structure s = Main.getStructure();
+    			s.fullScreen();
+    		}
+		});
+    	
+    	this.mRegscreen.addActionListener(new ActionListener()
+		{
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			Structure s = Main.getStructure();
+    			s.regScreen();
+    		}
+		});
+    	
     	this.mQuit.addActionListener(new ActionListener()
 		{
     		public void actionPerformed(ActionEvent e)
@@ -77,12 +100,12 @@ public class Menu extends JMenuBar
 	
     public void showMenu()
     {
-    	this.setVisible(true);
+    	//this.setVisible(true);
     }
     
     public void hideMenu()
     {
-    	this.setVisible(false);
+    	//this.setVisible(false);
     }
     
 }
