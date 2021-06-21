@@ -9,8 +9,8 @@ import javax.swing.JMenuItem;
 
 public class Menu extends JMenuBar
 {
-	private JMenu mControls, mRespawn, mQuit;
-	private JMenuItem mTest;
+	private JMenu mMenu, mControls;
+	private JMenuItem mRespawn, mQuit;
 	
 	Menu()
 	{
@@ -19,27 +19,23 @@ public class Menu extends JMenuBar
 	
 	private void initUI()
 	{
-		mControls = new JMenu("Controls");
-		mRespawn = new JMenu("Respawn");
-		mQuit = new JMenu("Quit");
+		mMenu = new JMenu("Menu");
+		mQuit = new JMenuItem("Quit");
 		
+		mControls = new JMenu("Controls");
+		mRespawn = new JMenuItem("Respawn | RMB");
+		
+		mMenu.add(mQuit);
+		this.add(mMenu);
+		
+		mControls.add(mRespawn);
 		this.add(mControls);
-		this.add(mRespawn);
-		this.add(mQuit);
 		
 		setupActionMenu();
 	}
 	
     private void setupActionMenu()
-    {
-    	this.mControls.addActionListener(new ActionListener()
-    	{  
-			public void actionPerformed(ActionEvent e)
-			{  
-				System.out.println("yuh");
-			}  
-		});
-    	
+    {    	
     	this.mRespawn.addActionListener(new ActionListener()
     	{  
 			public void actionPerformed(ActionEvent e)
