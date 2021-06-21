@@ -8,6 +8,7 @@ class Structure extends JFrame
 {
 	static Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	protected static Background background;
+	protected static Menu mb;
 
 	public Structure() throws AWTException
 	{
@@ -18,6 +19,9 @@ class Structure extends JFrame
 	{
 	    background = new Background();
 		setContentPane(background);
+		
+		mb = new Menu();
+		setJMenuBar(mb);
 
 	    setTitle("Ball On Desktop");
         setPreferredSize(new Dimension(d));
@@ -32,4 +36,9 @@ class Structure extends JFrame
         setVisible(true);
 		setFocusable(false);
 	}
+	
+    public static Menu getMenu()
+    {
+    	return mb;
+    }
 }
