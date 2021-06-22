@@ -62,19 +62,19 @@ class Background extends JPanel
 		super.paintComponent(g2d);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        Color c = b.getColor();
+        Color bc = b.getColor();
         if (trailState)
         {
-	        Color n = oppositeColor(c);
+	        Color tc = t.getColor();
 	        
-	        g2d.setColor(n);
+	        g2d.setColor(tc);
 	        
 	        for (Trail.Circle circles : t.circles)
 	        {
 	        	g2d.fill(circles);
 	        }
         }
-        g2d.setColor(c);
+        g2d.setColor(bc);
         g2d.fill(b);
 	}
     
@@ -110,11 +110,8 @@ class Background extends JPanel
     	return b;
     }
     
-    public static Color oppositeColor(Color old)
+    public static Trail getTrail()
     {
-    	int red = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getRed(); 
-        int green = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getGreen();
-        int blue = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getBlue();
-    	return new Color(red, green, blue, 25);
+    	return t;
     }
 }

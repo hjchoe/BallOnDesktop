@@ -35,20 +35,6 @@ class MouseSense extends MouseAdapter
     {
         doMove(e);
     }
-    
-    @Override
-    public void mouseMoved(MouseEvent e)
-    {
-    	Menu mb = Structure.getMenu();
-    	if (e.getY() < mb.getHeight())
-    	{
-    		mb.showMenu();
-    	}
-    	else
-    	{
-    		mb.hideMenu();
-    	}
-    }
 
     private void doMove(MouseEvent e)
     {

@@ -84,6 +84,11 @@ class Structure extends JFrame
         repaint();
 	}
 	
+	public Background getBackgroundpanel()
+	{
+		return background;
+	}
+	
     public static Menu getMenu()
     {
     	return mb;

@@ -45,17 +45,17 @@ class Ball extends Ellipse2D.Float
             this.velX *= -0.80f;
             this.x = 0.0f;
         }
-    	else if (this.x > Structure.d.width - 35f)
+    	else if (this.x > Structure.d.width - this.width)
         {
             this.velX *= -0.80f;
-            this.x = Structure.d.width - 35f;
+            this.x = Structure.d.width - this.width;
         }
         
-        if (this.y > Structure.d.height - 75f)
+        if (this.y > Structure.d.height - this.height - 20)
     	{
         	this.velX *= 0.90f;
             this.velY *= -0.80f;
-            this.y = Structure.d.height - 75f;
+            this.y = Structure.d.height - this.height - 20;
     	}
         else if (this.y < 5)
 		{
@@ -128,11 +128,26 @@ class Ball extends Ellipse2D.Float
     	this.velY = 0;
     }
     
+    public void setColor(int r, int g, int b)
+    {
+    	this.c = new Color(r, g, b);
+    }
+    
     public void changeColor()
     {
     	if (this.colorIndex == colors.length-1) this.colorIndex = -1;
     	this.colorIndex++;
     	this.c = colors[colorIndex];
+    	
+    	Background.getTrail().setColor(oppositeColor(this.c));
+    }
+    
+    public static Color oppositeColor(Color old)
+    {
+    	int red = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getRed(); 
+        int green = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getGreen();
+        int blue = Math.max(old.getRed(), Math.max(old.getBlue(), old.getGreen())) + Math.min(old.getRed(), Math.min(old.getBlue(), old.getGreen())) - old.getBlue();
+    	return new Color(red, green, blue, 25);
     }
     
     public Color getColor()
