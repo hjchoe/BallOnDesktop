@@ -112,7 +112,7 @@ class Setup
         	String temp = line.replace("\n", "");
         	if (temp.split("\\$@#")[0].equals(section))
         	{
-        		line.replace(temp.split("\\$@#")[1], value);
+        		line = temp.split("\\$@#")[0] + "$@#" + value;
         	}
         	data += (line+"\n");
         }
