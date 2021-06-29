@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class Menu extends JMenuBar
+class Menu extends JMenuBar
 {
 	private JMenu mMenu, mControls, mCustomize;
 	private JMenuItem mRespawn, mColor, mTrail, mFullscreen, mRegscreen, mQuit, mBackgroundColor, mBallColor, mBallSize, mTrailColor;
@@ -242,8 +242,8 @@ public class Menu extends JMenuBar
 						int rad = Integer.parseInt(s);
 						if (rad >= 10 && rad <= 100)
 						{
-							Background.getBall().width = rad/2;
-							Background.getBall().height = rad/2;
+							Background.getBall().width = rad*2;
+							Background.getBall().height = rad*2;
 							Background.getTrail().reSize(rad);
 						}
 						Structure struct = Main.getStructure();

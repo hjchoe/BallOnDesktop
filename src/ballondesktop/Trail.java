@@ -35,11 +35,11 @@ class Trail
 	
 	public void reSize(float s)
 	{
-		float newsize = s;
+		float newsize = s/2;
 		for (int i = 0; i < 20; i++)
 		{
-			circles[i].width = newsize/2;
-			circles[i].height = newsize/2;
+			circles[i].width = newsize*2;
+			circles[i].height = newsize*2;
 			newsize += 0.25;
 		}
 	}

@@ -8,9 +8,12 @@ import java.awt.event.ComponentEvent;
 class Main
 {
 	static Structure fr;
+	private static Setup s;
 	
 	public static void main(String[] args) throws AWTException
     {
+		s = new Setup();
+		
     	fr = new Structure();
 		fr.addComponentListener(new ComponentAdapter()
 		{
