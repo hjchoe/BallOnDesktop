@@ -77,7 +77,7 @@ class Structure extends JFrame
         setVisible(true);
         
     	background.setOpaque(true);
-    	background.getBall().reset();
+    	Background.getBall().reset();
     	background.repaint();
     	background.setVisible(true);
         

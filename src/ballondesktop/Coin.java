@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class Coin extends JLabel
 {
 	private ImageIcon images[] = new ImageIcon[5];
