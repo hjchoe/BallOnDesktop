@@ -47,6 +47,6 @@ public class Coin extends JLabel
                 else imageIndex = 0;
             }
         };
-        executorService.scheduleAtFixedRate(rebuild, 0, 250, TimeUnit.MILLISECONDS);
+        executorService.scheduleAtFixedRate(rebuild, 0, 150, TimeUnit.MILLISECONDS);
 	}
 }
