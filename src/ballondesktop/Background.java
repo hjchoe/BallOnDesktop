@@ -52,7 +52,7 @@ class Background extends JPanel
             	}
             }
         };
-        executorService.scheduleAtFixedRate(spawnCoin, 0, 5, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(spawnCoin, 0, 3, TimeUnit.SECONDS);
 	}
 
     private void initUI()
