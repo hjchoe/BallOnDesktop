@@ -1,14 +1,18 @@
 package ballondesktop;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-@SuppressWarnings("serial")
 public class Coin extends JLabel
 {
 	private ImageIcon images[] = new ImageIcon[5];
@@ -33,7 +37,14 @@ public class Coin extends JLabel
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			images[i] = new ImageIcon(p + "/sprites/coin" + (i+1) + ".png");
+			BufferedImage bg;
+			try {
+				bg = ImageIO.read(getClass().getResource("/sprites/coin" + (i+1) + ".png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			images[i] = new ImageIcon(bg);
+			//images[i] = new ImageIcon(p + "/sprites/coin" + (i+1) + ".png");
 		}
 	}
 	
