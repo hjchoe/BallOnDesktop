@@ -72,6 +72,9 @@ class Background extends JPanel
         
         b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
         t = new Trail();
+        
+		c = new Coin(100, 100);
+        add(c);
     }
     
     @Override
