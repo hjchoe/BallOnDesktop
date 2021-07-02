@@ -154,7 +154,7 @@ class Menu extends JMenuBar
 						
 						if (rn >= 0 && rn <= 255 && gn >= 0 && gn <= 255 && bn >= 0 && bn <= 255 && on >= 1 && on <= 255)
 						{
-							struct.setBackground(new Color(rn, gn, bn, on));
+							struct.setBackground(new Color(rn, gn, bn, on-1));
 						}
 						struct.remove(temp);
 						back.setFocusable(true);
