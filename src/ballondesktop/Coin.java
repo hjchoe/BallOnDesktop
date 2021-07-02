@@ -14,26 +14,23 @@ public class Coin extends JLabel
 	private int imageIndex = 0;
 	private Path p;
 	
-	Coin()
+	Coin(int x, int y)
 	{
 		p = Path.of(".").toAbsolutePath();
 		
 		setupImages();
-		//setText("test");
 		setIcon(images[0]);
-		setLocation(100, 100);
-		setSize(100, 100);
+		setLocation(x, y);
 		setVisible(true);
 		
-		//startAnimation();
+		startAnimation();
 	}
 	
 	private void setupImages()
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			images[i] = new ImageIcon(p + "/sprites/coin" + (i+1));
-			System.out.println(p + "/sprites/coin" + (i+1));
+			images[i] = new ImageIcon(p + "/sprites/coin" + (i+1) + ".png");
 		}
 	}
 	
@@ -45,10 +42,11 @@ public class Coin extends JLabel
         {
             public void run()
             {
-                setIcon(images[imageIndex]);
-                imageIndex++;
+            	setIcon(images[imageIndex]);
+                if (imageIndex != 4) imageIndex++;
+                else imageIndex = 0;
             }
         };
-        executorService.scheduleAtFixedRate(rebuild, 0, 100, TimeUnit.MILLISECONDS);
+        executorService.scheduleAtFixedRate(rebuild, 0, 250, TimeUnit.MILLISECONDS);
 	}
 }
