@@ -13,6 +13,7 @@ public class Coin extends JLabel
 	private ImageIcon images[] = new ImageIcon[5];
 	private int imageIndex = 0;
 	private Path p;
+	private Boolean state = false;
 	
 	Coin(int x, int y)
 	{
@@ -48,5 +49,15 @@ public class Coin extends JLabel
             }
         };
         executorService.scheduleAtFixedRate(rebuild, 0, 150, TimeUnit.MILLISECONDS);
+	}
+	
+	public Boolean getState()
+	{
+		return state;
+	}
+	
+	public void changeState(Boolean s)
+	{
+		this.state = s;
 	}
 }

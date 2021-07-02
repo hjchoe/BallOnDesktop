@@ -1,5 +1,6 @@
 package ballondesktop;
 
+import java.util.Random;
 import java.util.concurrent.*;
 import java.awt.*;
 import javax.swing.*;
@@ -36,6 +37,23 @@ class Background extends JPanel
             }
         };
         executorService.scheduleAtFixedRate(trail, 0, 5, TimeUnit.MILLISECONDS);
+        
+        final Runnable spawnCoin = new Runnable()
+        {
+            public void run()
+            {
+            	Random rand = new Random();
+            	int n = rand.nextInt(10);
+            	if (!c.getState() && n == 10)
+            	{
+            		Dimension d = Main.getStructure().d;
+	        		c = new Coin(rand.nextInt(d.width), rand.nextInt(d.height));
+	                add(c);
+	                c.changeState(true);
+            	}
+            }
+        };
+        executorService.scheduleAtFixedRate(spawnCoin, 0, 5, TimeUnit.SECONDS);
 	}
 
     private void initUI()
@@ -54,9 +72,6 @@ class Background extends JPanel
         
         b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
         t = new Trail();
-        
-		c = new Coin(100, 100);
-        add(c);
     }
     
     @Override
@@ -98,9 +113,10 @@ class Background extends JPanel
         float dx = b.x - c.getX();
         float dy = b.y - c.getY();
         double distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < b.width/2 + 17/2)
+        if (!grabbedState && distance < b.width/2 + 17/2)
         {
-        	System.out.println("coin");
+        	remove(c);
+        	c.changeState(false);
         }
     }
     
