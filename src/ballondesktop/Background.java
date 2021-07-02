@@ -9,6 +9,7 @@ class Background extends JPanel
 {
 	private static Ball b;
 	private static Trail t;
+	private static Coin c;
 	private static float a = 0.3f;
 	private static Boolean trailState = false;
 
@@ -54,8 +55,8 @@ class Background extends JPanel
         b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
         t = new Trail();
         
-		Coin testcoin = new Coin(100, 100);
-        add(testcoin);
+		c = new Coin(100, 100);
+        add(c);
     }
     
     @Override
@@ -93,6 +94,14 @@ class Background extends JPanel
         else b.released();
         b.posUpdate();
         b.updateCoords();
+        
+        float dx = b.x - c.getX();
+        float dy = b.y - c.getY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < b.width/2 + 17/2)
+        {
+        	System.out.println("coin");
+        }
     }
     
     public static void changeTrailState()
