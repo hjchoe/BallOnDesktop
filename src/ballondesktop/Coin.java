@@ -13,7 +13,7 @@ public class Coin extends JLabel
 	private ImageIcon images[] = new ImageIcon[5];
 	private int imageIndex = 0;
 	private Path p;
-	private Boolean state = false;
+	private Boolean state = true;
 	
 	Coin(int x, int y)
 	{
@@ -22,6 +22,7 @@ public class Coin extends JLabel
 		setupImages();
 		setIcon(images[0]);
 		setLocation(x, y);
+		setSize(17, 17);
 		setVisible(true);
 		
 		startAnimation();

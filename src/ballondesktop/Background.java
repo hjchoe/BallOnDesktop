@@ -43,17 +43,16 @@ class Background extends JPanel
             public void run()
             {
             	Random rand = new Random();
-            	int n = rand.nextInt(10);
-            	if (!c.getState() && n == 10)
+            	int n = rand.nextInt(3);
+            	if (!c.getState() && n == 1)
             	{
-            		Dimension d = Main.getStructure().d;
-	        		c = new Coin(rand.nextInt(d.width), rand.nextInt(d.height));
+	        		c = new Coin(rand.nextInt(Structure.d.width-200)+100, rand.nextInt(Structure.d.height-200)+100);
 	                add(c);
 	                c.changeState(true);
             	}
             }
         };
-        executorService.scheduleAtFixedRate(spawnCoin, 0, 5, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(spawnCoin, 0, 1, TimeUnit.SECONDS);
 	}
 
     private void initUI()
@@ -62,6 +61,7 @@ class Background extends JPanel
     	setBackground(new Color(0, 0, 0, 255));
     	setFocusable(true);
         requestFocus();
+        setLayout(null);
     	
         MouseSense ma = new MouseSense();
         addMouseMotionListener(ma);
@@ -72,8 +72,7 @@ class Background extends JPanel
         
         b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
         t = new Trail();
-        
-		c = new Coin(100, 100);
+        c = new Coin(Structure.d.width/2, Structure.d.height/2);
         add(c);
     }
     
@@ -116,7 +115,7 @@ class Background extends JPanel
         float dx = b.x - c.getX();
         float dy = b.y - c.getY();
         double distance = Math.sqrt(dx * dx + dy * dy);
-        if (!grabbedState && distance < b.width/2 + 17/2)
+        if (!grabbedState && c.getState() && distance < b.width/2 + 17/2)
         {
         	remove(c);
         	c.changeState(false);
