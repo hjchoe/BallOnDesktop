@@ -323,6 +323,7 @@ class Menu extends JMenuBar
 		temp.requestFocus();
 		temp.setVisible(true);
 		temp.setLocation(w/3, h/3);
+		temp.setLayout(null);
 		return temp;
     }
 }

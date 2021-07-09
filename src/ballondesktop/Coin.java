@@ -37,14 +37,17 @@ public class Coin extends JLabel
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			BufferedImage bg;
-			try {
-				bg = ImageIO.read(getClass().getResource("/sprites/coin" + (i+1) + ".png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			images[i] = new ImageIcon(bg);
-			//images[i] = new ImageIcon(p + "/sprites/coin" + (i+1) + ".png");
+			//BufferedImage bg;
+			//try
+			//{
+				//bg = ImageIO.read(getClass().getResource("/sprites/coin" + (i+1) + ".png"));
+			//}
+			///catch (IOException e)
+			//{
+			//	e.printStackTrace();
+			//}
+			//images[i] = new ImageIcon(bg);
+			images[i] = new ImageIcon(p + "/sprites/coin" + (i+1) + ".png");
 		}
 	}
 	

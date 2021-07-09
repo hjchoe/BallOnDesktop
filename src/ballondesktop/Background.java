@@ -27,7 +27,7 @@ class Background extends JPanel
                 repaint();
             }
         };
-        executorService.scheduleAtFixedRate(rebuild, 0, 25, TimeUnit.MILLISECONDS);
+        executorService.scheduleAtFixedRate(rebuild, 0, 30, TimeUnit.MILLISECONDS);
         
         final Runnable trail = new Runnable()
         {
@@ -36,7 +36,7 @@ class Background extends JPanel
                 if (trailState) trailUpdate();
             }
         };
-        executorService.scheduleAtFixedRate(trail, 0, 5, TimeUnit.MILLISECONDS);
+        executorService.scheduleAtFixedRate(trail, 0, 30, TimeUnit.MILLISECONDS);
         
         final Runnable spawnCoin = new Runnable()
         {
@@ -72,7 +72,7 @@ class Background extends JPanel
         
         b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
         t = new Trail();
-        c = new Coin(Structure.d.width/2, Structure.d.height/2);
+        c = new Coin(Structure.d.width/2, Structure.d.height/2-100);
         add(c);
     }
     
