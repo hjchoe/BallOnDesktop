@@ -33,8 +33,12 @@ class Structure extends JFrame
 		setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		setUndecorated(true);
         setDefaultLookAndFeelDecorated(true);
-    	setBackground(new Color(0, 0, 0, 1));
-        pack();
+        
+        Setup s = Main.getSetup();
+        String[] color = s.getData("backgroundColor").split(",");
+    	setBackground(new Color(Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]), Integer.parseInt(color[3])));
+        
+    	pack();
 
 		setLocationRelativeTo(null);
         setVisible(true);

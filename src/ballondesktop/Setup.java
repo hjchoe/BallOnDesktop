@@ -26,15 +26,6 @@ class Setup
 			createDataFile();
 			setupDataFile();
 		}
-		
-		try
-		{
-			updateData("balance", "100");
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 	
 	private Boolean createDataFolder()
@@ -65,7 +56,7 @@ class Setup
 		}
 	}
 	
-	private void setupDataFile()
+	public void setupDataFile()
 	{
 		try
 		{
@@ -82,45 +73,65 @@ class Setup
 		}
 	}
 	
-	public String getData(String section) throws FileNotFoundException
+	public String getData(String section)
 	{
 		String result = "error";
 		
-		Scanner s = new Scanner(dataFile);
-	    while (s.hasNextLine())
-	    {
-	    	String[] data = s.nextLine().replace("\n", "").split("\\$@#");
-	    	if (data[0].equals(section))
-	    	{
-	    		result = data[1];
-	    		break;
-	    	}
-	    }
-	    s.close();
+		Scanner s;
+		try
+		{
+			s = new Scanner(dataFile);
+			while (s.hasNextLine())
+		    {
+		    	String[] data = s.nextLine().replace("\n", "").split("\\$@#");
+		    	if (data[0].equals(section))
+		    	{
+		    		result = data[1];
+		    		break;
+		    	}
+		    }
+		    s.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 		
 		return result;
 	}
 	
-	public void updateData(String section, String value) throws IOException
+	public void updateData(String section, String value)
 	{
-		BufferedReader file = new BufferedReader(new FileReader(dataFile));
-		String data = "";
-        String line;
-        
-        while ((line = file.readLine()) != null)
-        {
-        	String temp = line.replace("\n", "");
-        	if (temp.split("\\$@#")[0].equals(section))
-        	{
-        		line = temp.split("\\$@#")[0] + "$@#" + value;
-        	}
-        	data += (line+"\n");
-        }
-        file.close();
-        
-		FileWriter writer = new FileWriter(dataFile, false);
-	    writer.write(data);
-	    writer.flush();
-	    writer.close();
+		BufferedReader file;
+		try
+		{
+			file = new BufferedReader(new FileReader(dataFile));
+			String data = "";
+	        String line;
+	        
+	        while ((line = file.readLine()) != null)
+	        {
+	        	String temp = line.replace("\n", "");
+	        	if (temp.split("\\$@#")[0].equals(section))
+	        	{
+	        		line = temp.split("\\$@#")[0] + "$@#" + value;
+	        	}
+	        	data += (line+"\n");
+	        }
+	        file.close();
+	        
+			FileWriter writer = new FileWriter(dataFile, false);
+		    writer.write(data);
+		    writer.flush();
+		    writer.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

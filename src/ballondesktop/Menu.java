@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ import javax.swing.JTextField;
 class Menu extends JMenuBar
 {
 	private JMenu mMenu, mControls, mCustomize;
-	private JMenuItem mRespawn, mColor, mTrail, mFullscreen, mRegscreen, mQuit, mBackgroundColor, mBallColor, mBallSize, mTrailColor;
+	private JMenuItem mRespawn, mColor, mTrail, mFullscreen, mRegscreen, mQuit, mBackgroundColor, mBallColor, mBallSize, mTrailColor, mResetDefault;
 	
 	Menu()
 	{
@@ -41,6 +42,7 @@ class Menu extends JMenuBar
 		mBallColor = new JMenuItem("Set Ball Color");
 		mBallSize = new JMenuItem("Set Ball Size");
 		mTrailColor = new JMenuItem("Set Trail Color");
+		mResetDefault = new JMenuItem("Reset to Default");
 		
 		mMenu.add(mFullscreen);
 		mMenu.add(mRegscreen);
@@ -56,6 +58,7 @@ class Menu extends JMenuBar
 		mCustomize.add(mBallColor);
 		mCustomize.add(mBallSize);
 		mCustomize.add(mTrailColor);
+		mCustomize.add(mResetDefault);
 		this.add(mCustomize);
 		
 		setupActionMenu();
@@ -155,6 +158,13 @@ class Menu extends JMenuBar
 						if (rn >= 0 && rn <= 255 && gn >= 0 && gn <= 255 && bn >= 0 && bn <= 255 && on >= 1 && on <= 255)
 						{
 							struct.setBackground(new Color(rn, gn, bn, on-1));
+							Setup s = Main.getSetup();
+							StringBuilder color = new StringBuilder();  
+							color.append(Integer.toString(rn) + ",");
+							color.append(Integer.toString(gn) + ",");
+							color.append(Integer.toString(bn) + ",");
+							color.append(Integer.toString(on-1));
+							s.updateData("backgroundColor", color.toString());
 						}
 						struct.remove(temp);
 						back.setFocusable(true);
@@ -202,6 +212,12 @@ class Menu extends JMenuBar
 						if (rn >= 0 && rn <= 255 && gn >= 0 && gn <= 255 && bn >= 0 && bn <= 255)
 						{
 							Background.getBall().setColor(rn, gn, bn);
+							Setup s = Main.getSetup();
+							StringBuilder color = new StringBuilder();  
+							color.append(Integer.toString(rn) + ",");
+							color.append(Integer.toString(gn) + ",");
+							color.append(Integer.toString(bn));
+							s.updateData("ballColor", color.toString());
 						}
 						Structure struct = Main.getStructure();
 						struct.remove(temp);
@@ -245,6 +261,8 @@ class Menu extends JMenuBar
 							Background.getBall().width = rad*2;
 							Background.getBall().height = rad*2;
 							Background.getTrail().reSize(rad);
+							Setup set = Main.getSetup();
+							set.updateData("ballSize", Integer.toString(rad));
 						}
 						Structure struct = Main.getStructure();
 						struct.remove(temp);
@@ -291,6 +309,12 @@ class Menu extends JMenuBar
 						if (rn >= 0 && rn <= 255 && gn >= 0 && gn <= 255 && bn >= 0 && bn <= 255)
 						{
 							Background.getTrail().setColor(new Color(rn, gn, bn, 25));
+							Setup s = Main.getSetup();
+							StringBuilder color = new StringBuilder();  
+							color.append(Integer.toString(rn) + ",");
+							color.append(Integer.toString(gn) + ",");
+							color.append(Integer.toString(bn));
+							s.updateData("trailColor", color.toString());
 						}
 						Structure struct = Main.getStructure();
 						struct.remove(temp);
@@ -306,6 +330,27 @@ class Menu extends JMenuBar
     			temp.add(b);
     			temp.add(enter);
     			Main.getStructure().add(temp);
+    		}
+		});
+    	
+    	this.mResetDefault.addActionListener(new ActionListener()
+		{
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			Setup s = Main.getSetup();
+    			s.setupDataFile();
+    			
+    			Structure struct = Main.getStructure();
+				struct.setBackground(new Color(0, 0, 0, 1));
+				
+				Background.getBall().setColor(0, 255, 255);
+				
+				Background.getBall().width = 10*2;
+				Background.getBall().height = 10*2;
+				Background.getTrail().reSize(10);
+    			
+				Background.getTrail().setColor(new Color(255, 0, 0, 25));
+
     		}
 		});
     }

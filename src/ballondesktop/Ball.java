@@ -24,7 +24,9 @@ class Ball extends Ellipse2D.Float
     public Ball(float x, float y, float r)
     {
         setFrame(x - r, y - r, 2.0f * r, 2.0 * r);
-        this.c = colors[this.colorIndex];
+        Setup s = Main.getSetup();
+        String[] color = s.getData("ballColor").split(",");
+        this.c = new Color(Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]));
     }
 
     public boolean isHit(float x, float y)

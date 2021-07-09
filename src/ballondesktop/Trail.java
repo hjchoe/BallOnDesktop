@@ -6,17 +6,22 @@ import java.awt.geom.Ellipse2D;
 @SuppressWarnings("serial")
 class Trail
 {
-	float size = 5;
+	float size;
 	public Circle[] circles = new Circle[20];
 	public Color c;
 	
 	public Trail()
     {
+		Setup s = Main.getSetup();
+		size = Float.parseFloat(s.getData("ballSize"))/2f;
+		
 		for (int i = 0; i < 20; i++)
 		{
 			circles[i] = new Circle(size);
 			size += 0.25;
 		}
+        String[] color = s.getData("trailColor").split(",");
+        this.c = new Color(Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]), 25);
     }
 	
 	public class Circle extends Ellipse2D.Float

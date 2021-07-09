@@ -3,6 +3,9 @@ package ballondesktop;
 import java.util.Random;
 import java.util.concurrent.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -57,6 +60,7 @@ class Background extends JPanel
 
     private void initUI()
     {
+    	// Set panel transparent
     	setOpaque(false);
     	setBackground(new Color(0, 0, 0, 255));
     	setFocusable(true);
@@ -70,7 +74,9 @@ class Background extends JPanel
         KeySense ka = new KeySense();
         addKeyListener(ka);
         
-        b = new Ball(Structure.d.width/2, Structure.d.height/2, 10f);
+        Setup s = Main.getSetup();
+		float b_size = Float.parseFloat(s.getData("ballSize"));
+		b = new Ball(Structure.d.width/2, Structure.d.height/2, b_size);
         t = new Trail();
         c = new Coin(Structure.d.width/2, Structure.d.height/2-100);
         add(c);
@@ -119,6 +125,10 @@ class Background extends JPanel
         {
         	remove(c);
         	c.changeState(false);
+        	Setup s = Main.getSetup();
+        	int currbank;
+			currbank = Integer.parseInt(s.getData("balance"));
+			s.updateData("balance", Integer.toString(currbank++));
         }
     }
     

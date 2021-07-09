@@ -28,4 +28,9 @@ class Main
 	{
 		return fr;
 	}
+	
+	public static Setup getSetup()
+	{
+		return s;
+	}
 }
