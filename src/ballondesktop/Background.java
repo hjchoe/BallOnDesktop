@@ -118,10 +118,10 @@ class Background extends JPanel
         b.posUpdate();
         b.updateCoords();
         
-        float dx = b.x - c.getX();
-        float dy = b.y - c.getY();
+        float dx = (b.x+(b.width/2)) - (c.getX()+(c.getWidth()/2));
+        float dy = (b.y+(b.height/2)) - (c.getY()+(c.getWidth()/2));
         double distance = Math.sqrt(dx * dx + dy * dy);
-        if (!grabbedState && c.getState() && distance < b.width/2 + 17/2)
+        if (!grabbedState && c.getState() && distance < b.width/2)
         {
         	remove(c);
         	c.changeState(false);
