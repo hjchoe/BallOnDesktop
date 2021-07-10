@@ -1,5 +1,7 @@
 package ballondesktop;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.nio.file.Path;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -7,24 +9,57 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Coin extends JLabel
+class Balance extends JPanel
 {
 	private ImageIcon images[] = new ImageIcon[5];
 	private int imageIndex = 0;
 	private Path p;
-	private Boolean state = true;
+	private JLabel coinIcon;
+	private JLabel bal;
 	
-	Coin(int x, int y)
-	{
+	Balance()
+	{	
 		p = Path.of(".").toAbsolutePath();
-		
-		setupImages();
-		setIcon(images[0]);
-		setLocation(x, y);
-		setSize(17, 17);
+	
+		setOpaque(true);
+		setBackground(new Color(255, 255, 255));
+		setSize(new Dimension(300, 50));
+		setFocusable(false);
 		setVisible(true);
+		setLocation(Structure.d.width-300, 0);
+		//setLayout(null);
+		
+		createCoinIcon();
+		add(coinIcon);
+		
+		createBalanceIcon();
+		add(bal);
+	}
+	
+	private void createBalanceIcon()
+	{
+		Setup s = Main.getSetup();
+		String act_bal = s.getData("balance");
+		bal = new JLabel(act_bal);
+		bal.setVisible(true);
+	}
+	
+	public void updateBalance(int newbal)
+	{
+		bal.setText(Integer.toString(newbal));
+	}
+	
+	private void createCoinIcon()
+	{
+		coinIcon = new JLabel();
+		setupImages();
+		
+		coinIcon.setIcon(images[0]);
+		coinIcon.setSize(17, 17);
+		coinIcon.setVisible(true);
 		
 		startAnimation();
 	}
@@ -45,21 +80,11 @@ public class Coin extends JLabel
         {
             public void run()
             {
-            	setIcon(images[imageIndex]);
+            	coinIcon.setIcon(images[imageIndex]);
                 if (imageIndex != 4) imageIndex++;
                 else imageIndex = 0;
             }
         };
         executorService.scheduleAtFixedRate(rebuild, 0, 150, TimeUnit.MILLISECONDS);
-	}
-	
-	public Boolean getState()
-	{
-		return state;
-	}
-	
-	public void changeState(Boolean s)
-	{
-		this.state = s;
 	}
 }

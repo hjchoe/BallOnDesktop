@@ -19,7 +19,7 @@ class Main
 		{
 			public void componentResized(ComponentEvent evt)
 			{
-				Main.getStructure().d = new Dimension(Main.getStructure().getWidth(), Main.getStructure().getHeight());
+				Structure.d = new Dimension(Main.getStructure().getWidth(), Main.getStructure().getHeight());
 			}
 		});
     }

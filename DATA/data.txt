@@ -1,4 +1,4 @@
-balance$@#0
+balance$@#8
 ballColor$@#255,0,255
 trailColor$@#255,0,0
 backgroundColor$@#0,0,0,1

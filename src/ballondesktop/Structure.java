@@ -10,6 +10,7 @@ class Structure extends JFrame
 	static Dimension d;
 	protected static Background background;
 	protected static Menu mb;
+	protected static Balance bal;
 
 	public Structure() throws AWTException
 	{
@@ -26,6 +27,9 @@ class Structure extends JFrame
 		mb = new Menu();
 		setJMenuBar(mb);
 		mb.setVisible(true);
+		
+		bal = new Balance();
+		add(bal);
 		
 	    setTitle("Ball On Desktop");
         setPreferredSize(new Dimension(d));
@@ -96,5 +100,10 @@ class Structure extends JFrame
     public static Menu getMenu()
     {
     	return mb;
+    }
+    
+    public static Balance getBalance()
+    {
+    	return bal;
     }
 }

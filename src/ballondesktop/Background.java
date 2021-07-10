@@ -3,8 +3,6 @@ package ballondesktop;
 import java.util.Random;
 import java.util.concurrent.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import javax.swing.*;
 
@@ -128,7 +126,9 @@ class Background extends JPanel
         	Setup s = Main.getSetup();
         	int currbank;
 			currbank = Integer.parseInt(s.getData("balance"));
-			s.updateData("balance", Integer.toString(currbank++));
+			s.updateData("balance", Integer.toString(currbank+1));
+			Structure.getBalance().updateBalance(currbank+1);
+			
         }
     }
     
