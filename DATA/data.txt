@@ -1,5 +1,5 @@
-balance$@#8
-ballColor$@#255,0,255
+balance$@#0
+ballColor$@#0,255,255
 trailColor$@#255,0,0
 backgroundColor$@#0,0,0,1
-ballSize$@#20
+ballSize$@#10

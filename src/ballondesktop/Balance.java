@@ -25,11 +25,11 @@ class Balance extends JPanel
 		p = Path.of(".").toAbsolutePath();
 	
 		setOpaque(true);
-		setBackground(new Color(255, 255, 255));
-		setSize(new Dimension(300, 50));
+		setBackground(new Color(0, 0, 0, 0));
+		setSize(new Dimension(100, 20));
 		setFocusable(false);
 		setVisible(true);
-		setLocation(Structure.d.width-300, 0);
+		setLocation(Structure.d.width-100, 0);
 		//setLayout(null);
 		
 		createCoinIcon();
@@ -44,6 +44,9 @@ class Balance extends JPanel
 		Setup s = Main.getSetup();
 		String act_bal = s.getData("balance");
 		bal = new JLabel(act_bal);
+		bal.setOpaque(true);
+		bal.setForeground(new Color(255, 255, 255));
+		bal.setBackground(new Color(0, 0, 0, 200));
 		bal.setVisible(true);
 	}
 	
