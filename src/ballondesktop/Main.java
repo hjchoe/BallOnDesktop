@@ -1,6 +1,5 @@
 package ballondesktop;
 
-import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -10,7 +9,7 @@ class Main
 	static Structure fr;
 	private static Setup s;
 	
-	public static void main(String[] args) throws AWTException
+	public static void main(String[] args)
     {
 		s = new Setup();
 		

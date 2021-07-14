@@ -1,7 +1,6 @@
 package ballondesktop;
 
 import java.awt.*;
-
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -12,12 +11,12 @@ class Structure extends JFrame
 	protected static Menu mb;
 	protected static Balance bal;
 
-	public Structure() throws AWTException
+	public Structure()
 	{
 	    initUI();
 	}
 	
-	private void initUI() throws AWTException
+	private void initUI()
 	{
 		d = Toolkit.getDefaultToolkit().getScreenSize();
 		
